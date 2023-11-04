@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Home from './Pages/Home';
+import Login from './Pages/Auth/Login';
+import Register from './Pages/Auth/Register';
+import AddCourses from './Pages/AddCourses';
 
-function App() {
+
+const App = () => {
+  const [route, setRoute] = useState(window.location.pathname);
+
+  const navigate = (path) => {
+    window.history.pushState({}, '', path);
+    setRoute(path);
+  };
+
+  window.onpopstate = () => {
+    setRoute(window.location.pathname);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav>
+        <button style={{marginLeft:"25px"}} onClick={() => navigate('/')}>Home</button>
+        <button style={{marginLeft:"25px"}} onClick={() => navigate('/login')}>Login</button>
+        <button style={{marginLeft:"25px"}} onClick={() => navigate('/register')}>Register</button>
+        <button style={{marginLeft:"25px"}} onClick={() => navigate('/addcourses')}>Add Courses</button>
+        
+      </nav>
+      
+      {route === '/' && <Home />}
+      {route === '/login' && <Login />}
+      {route === '/register' && <Register />}
+      {route === '/addcourses' && <AddCourses />}
     </div>
   );
-}
+};
 
 export default App;

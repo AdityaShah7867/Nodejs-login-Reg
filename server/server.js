@@ -4,6 +4,7 @@ require('dotenv').config();
 const cors = require('cors');
 require('dotenv').config();
 const AuthRoutes =  require('./Routes/Auth')
+const ProductRoutes = require('./Routes/Product')
 
 
 
@@ -19,6 +20,7 @@ mongoose
 
 
 app.use('/api/v1/auth',AuthRoutes)
+app.use('/api/v1/product',ProductRoutes)
 
 
 app.listen(PORT, () => {console.log(`Server is running on port: ${PORT}`)});
